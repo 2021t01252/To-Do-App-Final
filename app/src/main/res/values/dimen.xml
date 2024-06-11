@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="n">16sp</dimen>
+    <dimen name="s">14sp</dimen>
+    <dimen name="l">18sp</dimen>
+    <dimen name="m">15sp</dimen>
+    <dimen name="xs">13sp</dimen>
+    <dimen name="box_radius">25dp</dimen>
+
+
+</resources>

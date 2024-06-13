@@ -45,8 +45,8 @@ public class UserInfoActivity extends AppCompatActivity {
             Button btnCancel = dialog_signout.findViewById(R.id.btn_cancel);
 
             btnOk.setOnClickListener(v -> {
-                /*Intent intent = new Intent(UserInfoActivity.this, SignInActivity.class);
-                startActivity(intent);*/
+                Intent intent = new Intent(UserInfoActivity.this, SignInActivity.class);
+                startActivity(intent);
                 finish(); // Close current activity
             });
 
@@ -80,13 +80,13 @@ public class UserInfoActivity extends AppCompatActivity {
         });
 
         binding.card1.setOnClickListener(view -> {
-            /*Intent intent = new Intent(UserInfoActivity.this, DeveloperInfoActivity.class);
-            startActivity(intent);*/
+            Intent intent = new Intent(UserInfoActivity.this, DeveloperInfoActivity.class);
+            startActivity(intent);
         });
 
         findViewById(R.id.imageView2).setOnClickListener(view -> {
-            /*Intent intent = new Intent(UserInfoActivity.this, ToDoActivity.class);
-            startActivity(intent);*/
+            Intent intent = new Intent(UserInfoActivity.this, ToDoActivity.class);
+            startActivity(intent);
             finish();
         });
     }

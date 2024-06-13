@@ -34,8 +34,8 @@ public class DeveloperInfoActivity extends AppCompatActivity {
         ImageView imgEdit = findViewById(R.id.img_edit);
 
         imgBack.setOnClickListener(v -> {
-            /*Intent intent = new Intent(DeveloperInfoActivity.this, ToDoActivity.class);
-            startActivity(intent);*/
+            Intent intent = new Intent(DeveloperInfoActivity.this, ToDoActivity.class);
+            startActivity(intent);
         });
 
         imgEdit.setOnClickListener(v -> {
@@ -44,8 +44,8 @@ public class DeveloperInfoActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.btn_exit).setOnClickListener(v -> {
-            /*Intent intent = new Intent(DeveloperInfoActivity.this, SignInActivity.class);
-            startActivity(intent);*/
+            Intent intent = new Intent(DeveloperInfoActivity.this, SignInActivity.class);
+            startActivity(intent);
         });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

@@ -84,16 +84,16 @@ public class ToDoActivity extends AppCompatActivity {
         binding.btnDeveloperInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent intent = new Intent(ToDoActivity.this, DeveloperInfoActivity.class);
-                startActivity(intent);*/
+                Intent intent = new Intent(ToDoActivity.this, DeveloperInfoActivity.class);
+                startActivity(intent);
             }
         });
 
         binding.btnUserInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent intent = new Intent(ToDoActivity.this, UserInfoActivity.class);
-                startActivity(intent);*/
+                Intent intent = new Intent(ToDoActivity.this, UserInfoActivity.class);
+                startActivity(intent);
             }
         });
     }

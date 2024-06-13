@@ -32,16 +32,16 @@ public class SignInActivity extends AppCompatActivity {
         binding.txtSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent intent=new Intent(SignInActivity.this,SignUpActivity.class);
-                startActivity(intent);*/
+                Intent intent=new Intent(SignInActivity.this,SignUpActivity.class);
+                startActivity(intent);
             }
         });
 
         binding.btnSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent intent=new Intent(SignInActivity.this,ToDoActivity.class);
-                startActivity(intent);*/
+                Intent intent=new Intent(SignInActivity.this,ToDoActivity.class);
+                startActivity(intent);
             }
         });
 

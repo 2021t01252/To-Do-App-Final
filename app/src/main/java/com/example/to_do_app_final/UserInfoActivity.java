@@ -5,16 +5,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-import android.widget.EditText; // Make sure this import is present
-
+import android.widget.EditText;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
 import com.example.to_do_app_final.databinding.ActivityUserInfoBinding;
 
 public class UserInfoActivity extends AppCompatActivity {
@@ -34,6 +31,17 @@ public class UserInfoActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // Retrieve data from SharedPreferences
+        SharedPreferenceManager sharedPreferenceManager = SharedPreferenceManager.getInstance(this);
+        String username = sharedPreferenceManager.getString("name");
+        String email = sharedPreferenceManager.getString("email");
+
+        // Set data to TextViews
+        binding.txtUsrinfo.setText(username);
+        binding.txtEmail.setText(email);
+        binding.txtItem.setText(username);
+        binding.txtDate.setText(email);
 
         binding.btnSignout.setOnClickListener(view -> {
             dialog_signout = new Dialog(UserInfoActivity.this);
@@ -88,6 +96,6 @@ public class UserInfoActivity extends AppCompatActivity {
             Intent intent = new Intent(UserInfoActivity.this, ToDoActivity.class);
             startActivity(intent);
             finish();
-  });
-}
+        });
+    }
 }

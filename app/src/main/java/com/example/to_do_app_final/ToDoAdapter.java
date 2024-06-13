@@ -100,6 +100,6 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
             toDoItem = itemView.findViewById(R.id.tv_todo_item);
             imgEdit = itemView.findViewById(R.id.img_edit);
             imgDelete = itemView.findViewById(R.id.img_delete);
-        }
-    }
+ }
+}
 }

@@ -36,5 +36,5 @@ public class SharedPreferenceManager {
         editor.apply();
     }
 
-    // Add other methods to save/get different data types if needed
+    // Add other methods to save/get different data types if needed
 }

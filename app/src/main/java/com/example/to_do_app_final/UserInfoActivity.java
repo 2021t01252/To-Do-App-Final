@@ -88,6 +88,6 @@ public class UserInfoActivity extends AppCompatActivity {
             Intent intent = new Intent(UserInfoActivity.this, ToDoActivity.class);
             startActivity(intent);
             finish();
-        });
-    }
+  });
+}
 }

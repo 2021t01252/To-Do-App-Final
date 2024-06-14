@@ -47,11 +47,9 @@ public class SignInActivity extends AppCompatActivity {
                 }
 
                 SharedPreferenceManager sharedPreferenceManager = SharedPreferenceManager.getInstance(SignInActivity.this);
-                String savedName = sharedPreferenceManager.getString("name");
-                String savedPassword = sharedPreferenceManager.getString("password");
-
-                if (enteredName.equals(savedName) && enteredPassword.equals(savedPassword)) {
+                if (sharedPreferenceManager.validateUser(enteredName, enteredPassword)) {
                     Intent intent = new Intent(SignInActivity.this, ToDoActivity.class);
+                    intent.putExtra("USER_ID", enteredName); // Pass the user ID to the ToDoActivity
                     startActivity(intent);
                     finish();
                 } else {
@@ -59,5 +57,6 @@ public class SignInActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 }

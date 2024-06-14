@@ -35,7 +35,9 @@ public class DeveloperInfoActivity extends AppCompatActivity {
 
         imgBack.setOnClickListener(v -> {
             Intent intent = new Intent(DeveloperInfoActivity.this, ToDoActivity.class);
+            intent.putExtra("USER_ID", getIntent().getStringExtra("USER_ID"));
             startActivity(intent);
+            finish(); // Close current activity
         });
 
         imgEdit.setOnClickListener(v -> {
@@ -46,6 +48,7 @@ public class DeveloperInfoActivity extends AppCompatActivity {
         findViewById(R.id.btn_exit).setOnClickListener(v -> {
             Intent intent = new Intent(DeveloperInfoActivity.this, SignInActivity.class);
             startActivity(intent);
+            finish(); // Close current activity
         });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

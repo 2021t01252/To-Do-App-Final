@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import androidx.activity.EdgeToEdge;
@@ -32,15 +33,25 @@ public class UserInfoActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Retrieve data from SharedPreferences
+        // Retrieve the user ID from the Intent
+        Intent intent = getIntent();
+        String userId = intent.getStringExtra("USER_ID");
+
+        if (userId == null) {
+            // Handle the case where user ID is not provided
+            Log.e("UserInfoActivity", "USER_ID not provided");
+            finish(); // or show an error message
+            return;
+        }
+
+        // Retrieve data from SharedPreferences for the specific user
         SharedPreferenceManager sharedPreferenceManager = SharedPreferenceManager.getInstance(this);
-        String username = sharedPreferenceManager.getString("name");
-        String email = sharedPreferenceManager.getString("email");
+        String email = sharedPreferenceManager.getUserEmail(userId);
 
         // Set data to TextViews
-        binding.txtUsrinfo.setText(username);
+        binding.txtUsrinfo.setText(userId);
         binding.txtEmail.setText(email);
-        binding.txtItem.setText(username);
+        binding.txtItem.setText(userId);
         binding.txtDate.setText(email);
 
         binding.btnSignout.setOnClickListener(view -> {
@@ -53,8 +64,8 @@ public class UserInfoActivity extends AppCompatActivity {
             Button btnCancel = dialog_signout.findViewById(R.id.btn_cancel);
 
             btnOk.setOnClickListener(v -> {
-                Intent intent = new Intent(UserInfoActivity.this, SignInActivity.class);
-                startActivity(intent);
+                Intent signOutIntent = new Intent(UserInfoActivity.this, SignInActivity.class);
+                startActivity(signOutIntent);
                 finish(); // Close current activity
             });
 
@@ -67,15 +78,23 @@ public class UserInfoActivity extends AppCompatActivity {
             dialog_editinfo.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog_editinfo.show();
 
-            EditText etName = dialog_editinfo.findViewById(R.id.et_name); // Ensure this line doesn't have a typo
-            EditText etEmail = dialog_editinfo.findViewById(R.id.et_email); // Ensure this line doesn't have a typo
+            EditText etName = dialog_editinfo.findViewById(R.id.et_name);
+            EditText etEmail = dialog_editinfo.findViewById(R.id.et_email);
             Button btnOk = dialog_editinfo.findViewById(R.id.btn_ok);
             Button btnCancel = dialog_editinfo.findViewById(R.id.btn_cancel);
 
-            btnOk.setOnClickListener(v -> {
-                String newName = etName.getText().toString(); // Ensure this line doesn't have a typo
-                String newEmail = etEmail.getText().toString(); // Ensure this line doesn't have a typo
+            etName.setText(userId); // Set the current username
+            etEmail.setText(email); // Set the current email
 
+            btnOk.setOnClickListener(v -> {
+                String newName = etName.getText().toString();
+                String newEmail = etEmail.getText().toString();
+
+                // Update user data
+                String password = sharedPreferenceManager.getUserPassword(userId);
+                sharedPreferenceManager.saveUser(newName, newEmail, password);
+
+                // Update TextViews
                 binding.txtUsrinfo.setText(newName);
                 binding.txtEmail.setText(newEmail);
                 binding.txtItem.setText(newName);
@@ -88,13 +107,14 @@ public class UserInfoActivity extends AppCompatActivity {
         });
 
         binding.card1.setOnClickListener(view -> {
-            Intent intent = new Intent(UserInfoActivity.this, DeveloperInfoActivity.class);
-            startActivity(intent);
+            Intent developerInfoIntent = new Intent(UserInfoActivity.this, DeveloperInfoActivity.class);
+            startActivity(developerInfoIntent);
         });
 
         findViewById(R.id.imageView2).setOnClickListener(view -> {
-            Intent intent = new Intent(UserInfoActivity.this, ToDoActivity.class);
-            startActivity(intent);
+            Intent toDoIntent = new Intent(UserInfoActivity.this, ToDoActivity.class);
+            toDoIntent.putExtra("USER_ID", userId); // Pass the user ID back
+            startActivity(toDoIntent);
             finish();
         });
     }

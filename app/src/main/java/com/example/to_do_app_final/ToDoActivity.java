@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,14 +29,27 @@ public class ToDoActivity extends AppCompatActivity {
     ArrayList<String> toDoList;
     SharedPreferences sharedPreferences;
 
+    String userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityToDoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Initialize SharedPreferences
-        sharedPreferences = getSharedPreferences("TODO_LIST", MODE_PRIVATE);
+        // Get the user ID from the Intent
+        Intent intent = getIntent();
+        userId = intent.getStringExtra("USER_ID");
+
+        if (userId == null) {
+            // Handle the case where user ID is not provided
+            Toast.makeText(this, "User ID is missing!", Toast.LENGTH_SHORT).show();
+            finish(); // or show an error message
+            return;
+        }
+
+        // Initialize SharedPreferences with user-specific key
+        sharedPreferences = getSharedPreferences("TODO_LIST_" + userId, MODE_PRIVATE);
 
         // Restore to-do list from SharedPreferences
         loadToDoList();
@@ -86,6 +100,7 @@ public class ToDoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ToDoActivity.this, DeveloperInfoActivity.class);
+                intent.putExtra("USER_ID", userId);  // Pass the user ID
                 startActivity(intent);
             }
         });
@@ -94,8 +109,9 @@ public class ToDoActivity extends AppCompatActivity {
         binding.btnUserInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ToDoActivity.this, UserInfoActivity.class);
-                startActivity(intent);
+                Intent intent1 = new Intent(ToDoActivity.this, UserInfoActivity.class);
+                intent1.putExtra("USER_ID", userId);  // Pass the user ID
+                startActivity(intent1);
             }
         });
     }

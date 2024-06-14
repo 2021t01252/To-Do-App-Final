@@ -62,9 +62,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             // Save data to SharedPreferences using SharedPreferenceManager
             SharedPreferenceManager sharedPreferenceManager = SharedPreferenceManager.getInstance(SignUpActivity.this);
-            sharedPreferenceManager.saveString("name", name);
-            sharedPreferenceManager.saveString("email", email);
-            sharedPreferenceManager.saveString("password", password);
+            sharedPreferenceManager.saveUser(name, email, password);
 
             // Show a success message
             Toast.makeText(SignUpActivity.this, "Sign Up Successful", Toast.LENGTH_SHORT).show();
